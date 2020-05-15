@@ -20,7 +20,7 @@ USEINLINE = '-DINLINE=static __inline__'
 
 CC = powerpc-eabi-gcc
 CFLAGS = -O2
-CFLAGS += $(MACHDEP) -Dmain=SDL_main -I$(DEVKITPRO)/libogc/include/SDL
+CFLAGS += $(MACHDEP) -Dmain=SDL_main -I$(DEVKITPRO)/portlibs/wii/include/SDL
 CFLAGS += -fsigned-char
 CFLAGS += -fno-exceptions
 CFLAGS += -fomit-frame-pointer
@@ -36,12 +36,11 @@ LD = $(CC) -Wl,-s $(MACHDEP) -Dmain=SDL_main
 CFLAGS += -Isrc
 
 CFLAGS += -DJOY_SDL -I$(DEVKITPRO)/libogc/include
-LIBS += -L$(DEVKITPPC)/powerpc-eabi/lib -L$(DEVKITPRO)/libogc/lib/wii -lSDL \
+LIBS += -L$(DEVKITPPC)/powerpc-eabi/lib -L$(DEVKITPRO)/libogc/lib/wii \ 
+        -L$(DEVKITPPC)/portlibs/wii/lib -lSDL \
 		-lfat -lwiiuse -lwiikeyboard -lbte -logc -lm -lstdc++
 
 CFLAGS += -Isrc/FUNIX -Isrc/SDL -I$(DEVKITPRO)/libogc/include
-LIBS += -L$(DEVKITPPC)/powerpc-eabi/lib -L$(DEVKITPRO)/libogc/lib/wii -lSDL \
-		-lfat -lwiiuse -lwiikeyboard -lbte -logc -lm -lstdc++
 CFLAGS += -DQUASI88_SDL
 
 ifdef SUPPORT_DOUBLE
