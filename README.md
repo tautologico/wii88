@@ -43,6 +43,17 @@ In the terminal, you may type `make -f Makefile.wii`.
 If everything proceed sucessfully, there will be a new `wii.dol` file.
 This file is also copied to `hbc/apps/wii88/boot.dol`.
 
+### Required libraries
+
+* SDL-wii
+
+To compile SDL-wii you'll need:
+* libogg
+* libvorbisidec
+* libjpeg
+* libpng
+* freetype
+
 ## Credits
 
 In this Wii port I tried to modify the original code from QUASI88 as less as possible. The additional code and build files are almost always apart the original files. Therefore, the emulation process itself is cretited to Showzoh Fukunaga (the original QUASI88 author). Also, the included `icon.png` file was created by [NeoRame](http://neorame.de/pre/).
