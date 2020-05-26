@@ -2,13 +2,13 @@
 # Makefile for Wii (based on the original Makefile from QUASI88 0.6.4)      #
 #############################################################################
 
+#---------------------------------------------------------------------------------
+# Clear the implicit built in rules
+#---------------------------------------------------------------------------------
+.SUFFIXES:
+#---------------------------------------------------------------------------------
+
 include $(DEVKITPPC)/wii_rules
-
-#ROMDIR = sd:/wii88/rom/
-#DISKDIR = sd:/wii88/disk/
-#TAPEDIR = sd:/wii88/tape/
-
-BINDIR = /usr/local/bin
 
 SUPPORT_DOUBLE = 1
 SUPPORT_UTF8 = 1
@@ -28,7 +28,7 @@ CFLAGS += -Wall
 
 CXX = powerpc-eabi-g++
 CXXFLAGS = $(CFLAGS)
-CXXLIBS = -L$(DEVKITPPC)/powerpc-eabi/lib -L$(DEVKITPRO)/libogc/lib/wii \
+CXXLIBS = -L$(DEVKITPRO)/portlibs/ppc/lib -L$(DEVKITPRO)/portlibs/wii/lib -L$(DEVKITPRO)/libogc/lib/wii \
 		  -lSDL -lfat -lwiiuse -lwiikeyboard -lbte -logc -lm -lstdc++
 
 LD = $(CC) -Wl,-s $(MACHDEP) -Dmain=SDL_main
@@ -36,9 +36,9 @@ LD = $(CC) -Wl,-s $(MACHDEP) -Dmain=SDL_main
 CFLAGS += -Isrc
 
 CFLAGS += -DJOY_SDL -I$(DEVKITPRO)/libogc/include
-LIBS += -L$(DEVKITPPC)/powerpc-eabi/lib -L$(DEVKITPRO)/libogc/lib/wii \ 
-        -L$(DEVKITPPC)/portlibs/wii/lib -lSDL \
-		-lfat -lwiiuse -lwiikeyboard -lbte -logc -lm -lstdc++
+LIBS += -L$(DEVKITPRO)/portlibs/ppc/lib -L$(DEVKITPRO)/libogc/lib/wii \
+        -L$(DEVKITPRO)/portlibs/wii/lib -lSDL \
+        -lfat -lwiiuse -lwiikeyboard -lbte -logc -lm -lstdc++
 
 CFLAGS += -Isrc/FUNIX -Isrc/SDL -I$(DEVKITPRO)/libogc/include
 CFLAGS += -DQUASI88_SDL
@@ -144,10 +144,10 @@ OBJDIR = obj.sdl
 OBJDIRS = $(OBJDIR) $(OBJDIR)/SDL $(OBJDIR)/FUNIX
 
 OBJDIRS += $(addprefix $(OBJDIR)/, \
-           $(SNDDRV_DIR) $(FMGEN_DIR) \
-           $(SD_Q88_DIR) $(SD_SDL_DIR) \
-           $(SRC_DIR) $(SOUND_DIR) $(UNIX_DIR) \
-           $(SYSDEP_DIR) $(DSP_DIR) $(MIXER_DIR) )
+		   $(SNDDRV_DIR) $(FMGEN_DIR) \
+		   $(SD_Q88_DIR) $(SD_SDL_DIR) \
+		   $(SRC_DIR) $(SOUND_DIR) $(UNIX_DIR) \
+		   $(SYSDEP_DIR) $(DSP_DIR) $(MIXER_DIR) )
 
 OBJECTS = $(addprefix $(OBJDIR)/, $(OBJECT) )
 
